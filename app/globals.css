@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+/*
+ * DevFlow design system — dark only.
+ * Linear/Vercel-leaning: near-black canvas, low-chroma surfaces, a single
+ * violet accent reserved for the "AI" surface, and semantic severity hues.
+ */
+
+@theme {
+  /* Canvas + surfaces (never pure black) */
+  --color-canvas: #0a0a0a;
+  --color-surface: #101012;
+  --color-surface-raised: #16161a;
+  --color-surface-hover: #1b1b20;
+
+  /* Hairline borders */
+  --color-line: #232328;
+  --color-line-strong: #2e2e35;
+
+  /* Text */
+  --color-fg: #ededed;
+  --color-fg-muted: #a1a1aa;
+  --color-fg-subtle: #6b6b75;
+
+  /* Violet accent — the product's personality, used sparingly */
+  --color-accent: #8b7cff;
+  --color-accent-strong: #6e56cf;
+  --color-accent-soft: #1a1730;
+
+  /* Severity scale for AI findings */
+  --color-sev-low: #34d399;
+  --color-sev-low-soft: #0e2a22;
+  --color-sev-med: #fbbf24;
+  --color-sev-med-soft: #2a230d;
+  --color-sev-high: #f87171;
+  --color-sev-high-soft: #2c1416;
+
+  /* Diff colors */
+  --color-diff-add: #1c3023;
+  --color-diff-add-fg: #7ee2a8;
+  --color-diff-del: #36181b;
+  --color-diff-del-fg: #f4a6a6;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --radius-card: 0.75rem;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-canvas);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle ambient glow behind the app — barely there, adds depth */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60rem 40rem at 80% -10%, rgba(110, 86, 207, 0.08), transparent 60%),
+    radial-gradient(50rem 30rem at 0% 0%, rgba(110, 86, 207, 0.04), transparent 55%);
+  pointer-events: none;
+}
+
+::selection {
+  background: var(--color-accent-strong);
+  color: #fff;
+}
+
+/* Quiet, thin scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-line-strong);
+  border-radius: 9999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Focus ring — keyboard only, accent colored */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@keyframes devflow-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-raised);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.04),
+      transparent
+    );
+    animation: devflow-shimmer 1.5s infinite;
+  }
+}

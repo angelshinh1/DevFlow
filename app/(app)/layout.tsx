@@ -2,7 +2,8 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth";
 import { getRepos } from "@/lib/data";
 import { GitHubAuthError } from "@/lib/github";
-import { Sidebar, type SidebarRepo } from "@/components/layout/sidebar";
+import { AppShell } from "@/components/layout/app-shell";
+import type { SidebarRepo } from "@/components/layout/sidebar";
 import { childLogger } from "@/lib/logger";
 
 const log = childLogger("app-layout");
@@ -29,9 +30,8 @@ export default async function AppLayout({ children }: { children: React.ReactNod
   if (needsReauth) redirect("/auth/signout");
 
   return (
-    <div className="flex h-dvh overflow-hidden">
-      <Sidebar user={{ username: user.username, avatarUrl: user.avatarUrl }} repos={repos} />
-      <div className="flex min-w-0 flex-1 flex-col">{children}</div>
-    </div>
+    <AppShell user={{ username: user.username, avatarUrl: user.avatarUrl }} repos={repos}>
+      {children}
+    </AppShell>
   );
 }

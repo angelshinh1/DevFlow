@@ -19,7 +19,7 @@ export default async function DashboardPage() {
         <h1 className="text-sm font-semibold text-fg">Dashboard</h1>
       </Header>
 
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
         <div className="mb-5">
           <h2 className="text-lg font-semibold tracking-tight text-fg">Your repositories</h2>
           <p className="text-sm text-fg-muted">

@@ -55,7 +55,7 @@ export default async function PRPage({ params }: PRPageProps) {
       </Header>
 
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 p-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,400px)]">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,400px)]">
           {/* Left: PR metadata + diff */}
           <div className="flex min-w-0 flex-col gap-5">
             <FadeIn>

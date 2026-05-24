@@ -3,7 +3,7 @@ import { Logo } from "./logo";
 import { NavLink } from "./nav-link";
 import { SignOutButton } from "./sign-out-button";
 import { Avatar } from "@/components/ui/avatar";
-import { GridIcon, HistoryIcon, RepoIcon } from "@/components/ui/icons";
+import { GridIcon, HistoryIcon, RepoIcon, CloseIcon } from "@/components/ui/icons";
 
 export interface SidebarUser {
   username: string;
@@ -19,16 +19,28 @@ export interface SidebarRepo {
 interface SidebarProps {
   user: SidebarUser;
   repos: SidebarRepo[];
+  /** When provided, renders a close button (used inside the mobile drawer). */
+  onClose?: () => void;
 }
 
 /** Persistent left navigation: primary links + the user's repositories. */
-export function Sidebar({ user, repos }: SidebarProps) {
+export function Sidebar({ user, repos, onClose }: SidebarProps) {
   return (
     <aside className="flex h-full w-64 shrink-0 flex-col border-r border-line bg-surface/60 backdrop-blur">
-      <div className="flex h-14 items-center px-5">
+      <div className="flex h-14 items-center justify-between px-5">
         <Link href="/dashboard" className="rounded-md">
           <Logo />
         </Link>
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close menu"
+            className="-mr-1 grid size-8 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg"
+          >
+            <CloseIcon className="size-4" />
+          </button>
+        )}
       </div>
 
       <nav className="flex flex-col gap-0.5 px-3">

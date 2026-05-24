@@ -19,7 +19,7 @@ export default async function HistoryPage() {
         <h1 className="text-sm font-semibold text-fg">Review history</h1>
       </Header>
 
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
         <div className="mb-5">
           <h2 className="text-lg font-semibold tracking-tight text-fg">Past reviews</h2>
           <p className="text-sm text-fg-muted">

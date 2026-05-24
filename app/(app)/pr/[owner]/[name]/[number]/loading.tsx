@@ -6,7 +6,7 @@ export default function PRLoading() {
     <>
       <HeaderSkeleton />
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 p-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,400px)]">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,400px)]">
           <div className="flex flex-col gap-5">
             <div className="space-y-3">
               <Skeleton className="h-4 w-16" />

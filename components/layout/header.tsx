@@ -1,12 +1,27 @@
+"use client";
+
 import Link from "next/link";
 import { Fragment, type ReactNode } from "react";
-import { ChevronRightIcon } from "@/components/ui/icons";
+import { ChevronRightIcon, MenuIcon } from "@/components/ui/icons";
+import { useSidebar } from "./sidebar-context";
 
-/** Sticky top bar for the main content column. */
+/** Sticky top bar for the main content column. Shows a menu button on mobile. */
 export function Header({ children, actions }: { children: ReactNode; actions?: ReactNode }) {
+  const { openSidebar } = useSidebar();
+
   return (
-    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-4 border-b border-line bg-canvas/80 px-6 backdrop-blur">
-      <div className="flex min-w-0 items-center gap-2">{children}</div>
+    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-canvas/80 px-4 backdrop-blur sm:px-6">
+      <div className="flex min-w-0 items-center gap-2">
+        <button
+          type="button"
+          onClick={openSidebar}
+          aria-label="Open menu"
+          className="-ml-1 grid size-9 shrink-0 place-items-center rounded-md text-fg-muted transition-colors hover:bg-surface-hover hover:text-fg lg:hidden"
+        >
+          <MenuIcon className="size-5" />
+        </button>
+        <div className="flex min-w-0 items-center gap-2">{children}</div>
+      </div>
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
     </header>
   );

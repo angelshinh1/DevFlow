@@ -81,7 +81,7 @@ body::before {
 }
 
 ::selection {
-  background: var(--color-accent-strong);
+  background: #F8EDC0;
   color: #0a0a0a;
 }
 

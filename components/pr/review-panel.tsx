@@ -44,8 +44,8 @@ export function ReviewPanel({
   return (
     // Gradient hairline border — the panel's "premium" cue.
     <div className="rounded-[var(--radius-card)] bg-gradient-to-b from-accent/50 via-accent/15 to-transparent p-px">
-      <div className="flex h-full flex-col rounded-[calc(var(--radius-card)-1px)] bg-surface">
-        <div className="flex items-center gap-2.5 border-b border-line px-5 py-4">
+      <div className="flex flex-col rounded-[calc(var(--radius-card)-1px)] bg-surface" style={{maxHeight: "calc(100dvh - 5rem)"}}>
+        <div className="flex shrink-0 items-center gap-2.5 border-b border-line px-5 py-4">
           <span className="grid size-7 place-items-center rounded-md bg-accent-soft text-accent">
             <SparkleIcon className="size-4" />
           </span>
@@ -62,7 +62,7 @@ export function ReviewPanel({
           )}
         </div>
 
-        <div className="flex-1 p-5">
+        <div className="flex-1 overflow-y-auto p-5">
           {!review && !pending && <EmptyReview onGenerate={run} error={error} />}
           {pending && <GeneratingState />}
           {review && !pending && <ReviewBody review={review} error={error} />}

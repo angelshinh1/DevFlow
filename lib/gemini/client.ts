@@ -12,7 +12,7 @@ import { REVIEW_SYSTEM_INSTRUCTION } from "./prompt";
 export const geminiLog = childLogger("gemini");
 
 /** Model id per the product spec. Centralized so it's a one-line swap. */
-export const REVIEW_MODEL = "gemini-1.5-flash";
+export const REVIEW_MODEL = "gemini-3.5-flash";
 
 /**
  * Response schema handed to Gemini so it returns strict JSON matching our

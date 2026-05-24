@@ -58,7 +58,7 @@ minimal, dark-only Linear/Vercel-leaning aesthetic.
 | Styling | Tailwind CSS v4 (CSS-first `@theme` tokens) |
 | Auth & DB | Supabase (GitHub OAuth, Postgres, Row Level Security) |
 | GitHub API | Octokit REST |
-| AI | Google Gemini (`gemini-1.5-flash`) with JSON-schema-constrained output |
+| AI | Google Gemini (`gemini-3.5-flash`) with JSON-schema-constrained output |
 | Validation | Zod (environment + AI response) |
 | Logging | pino (pretty in dev, JSON in prod) |
 | Animation | Framer Motion |

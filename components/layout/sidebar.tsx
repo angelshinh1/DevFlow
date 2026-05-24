@@ -27,7 +27,7 @@ interface SidebarProps {
 export function Sidebar({ user, repos, onClose }: SidebarProps) {
   return (
     <aside className="flex h-full w-64 shrink-0 flex-col border-r border-line bg-surface/60 backdrop-blur">
-      <div className="flex h-14 items-center justify-between px-5">
+      <div className="flex h-14 items-center justify-between px-5 mt-3">
         <Link href="/dashboard" className="rounded-md">
           <Logo />
         </Link>

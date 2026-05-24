@@ -20,7 +20,7 @@ const variants: Record<Variant, string> = {
   secondary: "bg-surface-raised text-fg border border-line hover:bg-surface-hover hover:border-line-strong",
   ghost: "text-fg-muted hover:text-fg hover:bg-surface-hover",
   accent:
-    "bg-accent-strong text-white hover:bg-accent shadow-[0_0_0_1px_rgba(139,124,255,0.4),0_8px_24px_-8px_rgba(110,86,207,0.6)]",
+    "bg-accent-strong text-canvas hover:bg-accent shadow-[0_0_0_1px_rgba(201,184,0,0.4),0_8px_24px_-8px_rgba(201,184,0,0.5)]",
   danger: "bg-[var(--color-sev-high-soft)] text-[var(--color-sev-high)] border border-[var(--color-sev-high)]/30 hover:border-[var(--color-sev-high)]/60",
 };
 

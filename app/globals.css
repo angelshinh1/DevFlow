@@ -22,10 +22,10 @@
   --color-fg-muted: #a1a1aa;
   --color-fg-subtle: #6b6b75;
 
-  /* Violet accent — the product's personality, used sparingly */
-  --color-accent: #8b7cff;
-  --color-accent-strong: #6e56cf;
-  --color-accent-soft: #1a1730;
+  /* Yellow accent — the product's personality, used sparingly */
+  --color-accent: #fffabc;
+  --color-accent-strong: #c9b800;
+  --color-accent-soft: #1e1c04;
 
   /* Severity scale for AI findings */
   --color-sev-low: #34d399;
@@ -75,14 +75,14 @@ body::before {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(60rem 40rem at 80% -10%, rgba(110, 86, 207, 0.08), transparent 60%),
-    radial-gradient(50rem 30rem at 0% 0%, rgba(110, 86, 207, 0.04), transparent 55%);
+    radial-gradient(60rem 40rem at 80% -10%, rgba(255, 250, 188, 0.06), transparent 60%),
+    radial-gradient(50rem 30rem at 0% 0%, rgba(255, 250, 188, 0.03), transparent 55%);
   pointer-events: none;
 }
 
 ::selection {
   background: var(--color-accent-strong);
-  color: #fff;
+  color: #0a0a0a;
 }
 
 /* Quiet, thin scrollbars */

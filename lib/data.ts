@@ -2,10 +2,28 @@ import "server-only";
 import { cache } from "react";
 import { listRepos, listOpenPullRequests, getPullRequestDetail } from "@/lib/github";
 import { createClient } from "@/lib/supabase/server";
-import type { SavedReview, AIReview } from "@/lib/types/review";
+import type { SavedReview, AIReview, ReviewBug, ReviewSuggestion } from "@/lib/types/review";
 import type { Database } from "@/lib/types/database";
 
 type ReviewRow = Database["public"]["Tables"]["reviews"]["Row"];
+
+/**
+ * Normalizes a jsonb array column. PostgREST returns jsonb already parsed, but
+ * defend against rows where it arrives as a JSON string (or null/garbage) so a
+ * single bad row can't crash a `.map()` downstream.
+ */
+function coerceJsonArray<T>(value: unknown): T[] {
+  if (Array.isArray(value)) return value as T[];
+  if (typeof value === "string") {
+    try {
+      const parsed: unknown = JSON.parse(value);
+      return Array.isArray(parsed) ? (parsed as T[]) : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+}
 
 /**
  * Request-cached data accessors. React's `cache` dedupes calls within a single
@@ -25,8 +43,8 @@ export const getPull = cache((owner: string, name: string, number: number) =>
 function rowToSavedReview(row: ReviewRow): SavedReview {
   const review: AIReview = {
     summary: row.ai_summary,
-    bugs: row.ai_bugs,
-    suggestions: row.ai_suggestions,
+    bugs: coerceJsonArray<ReviewBug>(row.ai_bugs),
+    suggestions: coerceJsonArray<ReviewSuggestion>(row.ai_suggestions),
     severity: row.severity,
   };
   return {

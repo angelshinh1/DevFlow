@@ -100,7 +100,6 @@ export default function LoginPage() {
       <footer className="mx-auto max-w-6xl border-t border-line px-6 py-6 text-xs text-fg-subtle sm:px-10">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <span>© DevFlow</span>
-          <span className="font-display italic">Powered by Gemini.</span>
         </div>
       </footer>
     </main>

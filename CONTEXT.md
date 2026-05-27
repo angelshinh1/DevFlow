@@ -18,27 +18,70 @@ DevFlow is a full-stack AI-powered GitHub PR code review dashboard built as a po
 
 ## Design System
 
-Dark-mode only. Linear/Vercel minimalist aesthetic. All tokens live in `app/globals.css` under `@theme`.
+Dual-mode editorial design. Warm cream light mode is the default; dark (near-black + yellow) is opt-in via theme toggle. All tokens live in `app/globals.css` under `@theme` as CSS variable indirections — `:root` sets light values, `[data-theme="dark"]` overrides with dark values.
 
-### Accent Color
+### Typography
 
-The accent color is yellow, not purple or violet. Any purple/violet is a mistake.
+- **Display**: Fraunces variable serif (`--font-display`). Used for headings, logotype, timestamps. `line-height: 1.04`, `letter-spacing: -0.02em`. Loaded in `app/layout.tsx` with `axes: ["opsz", "SOFT"]`, `style: ["normal", "italic"]`. No `weight` array — required for variable fonts with `axes`.
+- **Body/UI**: Geist Sans (`--font-sans`)
+- **Mono**: Geist Mono (`--font-mono`)
 
-- `--color-accent: #fffabc` -- light yellow, used for icon highlights and hover states
-- `--color-accent-strong: #c9b800` -- saturated yellow, used as solid button background
-- `--color-accent-soft: #1e1c04` -- very dark yellow tint, used for soft badge backgrounds
+Editorial CSS utilities (defined in `globals.css`, not Tailwind classes):
+- `.font-display` — applies serif, tight leading, tracking-in
+- `.display-relaxed` — overrides line-height to 1.15 for large display text that needs breathing room
+- `.accent-mark` — soft yellow highlight background (like a marker), `box-decoration-break: clone` so it wraps correctly across lines
+- `.drop-cap` — floating oversized first letter via `::first-letter`
+- `.editorial-em` — italic serif for inline emphasis
 
-The accent button variant in `components/ui/button.tsx` uses `text-canvas` (dark text) because `accent-strong` is a light yellow background. Do not use `text-white` on accent buttons.
+### Theme Architecture
 
-The box shadow on accent buttons uses `rgba(201,184,0,...)` derived from `accent-strong`, not any purple value.
+Tokens use CSS variable indirection so all Tailwind utilities switch automatically:
+```css
+@theme { --color-canvas: var(--canvas); ... }
+:root { --canvas: #F4F1EB; }  /* light */
+[data-theme="dark"] { --canvas: #0a0a0a; }  /* dark */
+```
+
+**Light palette** (warm cream / editorial paper):
+- `--canvas: #F4F1EB` (warm cream background)
+- `--surface: #FBF8F2` (card surfaces)
+- `--accent: #c9b800` (saturated mustard — used differently in light vs dark)
+- `--accent-strong: #a09000` (darker mustard for buttons on cream)
+- `--accent-soft: #FFF7C2` (pale yellow editorial highlight wash)
+- `--accent-ink: #1A1815` (text color on accent surfaces)
+
+**Dark palette** (near-black + yellow brand):
+- `--canvas: #0a0a0a`
+- `--accent: #fffabc` (light yellow for icon highlights)
+- `--accent-strong: #c9b800` (saturated yellow for buttons)
+- `--accent-soft: #1e1c04` (very dark yellow tint for soft backgrounds)
+- `--accent-ink: #0a0a0a`
+
+The accent color is always yellow. Never introduce purple or violet.
+
+### No-Flash Theme Init
+
+`app/layout.tsx` uses `next/script` with `strategy="beforeInteractive"` inside `<body>` to read `localStorage` and set `data-theme="dark"` before first paint. The `ThemeToggle` component initializes `useState<Theme>("light")` (stable server default) and syncs via `useEffect` to avoid hydration mismatch.
+
+### Accent Button
+
+Uses `text-accent-ink` (dark text) because both light and dark `accent-strong` backgrounds are light/yellow. Never use `text-white` on accent buttons.
+
+### Animations & Motion
+
+- Hover-lift (`card-interactive`): `translateY(-2px)` + shadow increase, guarded by `@media (hover: hover) and (pointer: fine)`. Defined in `globals.css` as a plain class (not Tailwind utility) because arbitrary media variants are unreliable in v4.
+- Button press: `active:scale-[0.97]`
+- Easing: `cubic-bezier(0.23, 1, 0.32, 1)` (strong ease-out). Never `ease-in` for UI transitions.
+- CSS vars: `--ease-out`, `--ease-in-out`, `--ease-drawer`
+
+### Ambient Atmosphere
+
+- `body::before`: dual radial accent glow (yellow-tinted), 55% opacity light / 35% dark
+- `body::after`: SVG `feTurbulence` film grain noise. Light: `mix-blend-mode: multiply`, 3.5% opacity. Dark: `mix-blend-mode: screen`, 6% opacity.
 
 ### Selection Color
 
-`::selection` background is `#F8EDC0` with `color: #0a0a0a`. This is intentional -- the yellow highlight requires dark text for contrast.
-
-### Ambient Glow
-
-The `body::before` radial gradient uses `rgba(255, 250, 188, ...)` (yellow-tinted).
+`::selection` background is `var(--color-accent-soft)` with `color: var(--color-fg)`.
 
 ### Scrollbars
 
@@ -47,6 +90,10 @@ Custom thin scrollbars via `scrollbar-width: thin` and `scrollbar-color: var(--c
 ### Skeleton Loader
 
 Defined as a Tailwind `@utility skeleton` block in globals.css. Uses a shimmer animation called `devflow-shimmer`.
+
+### Card Shadow
+
+`@utility card-shadow` — editorial box-shadow that adapts per theme. Light: warm brown-tinted layers. Dark: deep black layers.
 
 ## Key Architecture Decisions
 
@@ -109,11 +156,11 @@ The `react-hooks/set-state-in-effect` rule is active. Do not write `useEffect(()
 
 ### Logo (`components/layout/logo.tsx`)
 
-Uses Next.js `Image` from `next/image`. Points to `/devflow-logo.png` in the `public` folder. The `compact` prop renders 24x24; the default renders 96x32. Uses `object-contain` and `priority`.
+Text-based logotype using Fraunces display serif. "Dev" in italic + "Flow" upright — visual tension in a single word. The `compact` prop renders just the italic "D" monogram. No image file involved. Default size `text-xl`; caller can override via `className` (the component guards against duplicate text-size classes via `!className?.includes("text-")`).
 
 ### Sidebar (`components/layout/sidebar.tsx`)
 
-The logo header row has `mt-3` for top margin. This is intentional.
+Contains `ThemeToggle` in the footer. Nav links use `accent-soft` active state (`bg-accent-soft text-fg`) with an optional `marker` prop for Roman numeral display. Repo section label uses `font-display` small-caps style.
 
 ### AI Review Panel (`components/pr/review-panel.tsx`)
 
@@ -127,7 +174,11 @@ The `100dvh` unit is used (not `100vh`) to handle mobile browser chrome correctl
 
 ### Button (`components/ui/button.tsx`)
 
-Five variants: `primary`, `secondary`, `ghost`, `accent`, `danger`. Default variant is `secondary`. The `loading` prop shows a spinner and disables the button.
+Five variants: `primary`, `secondary`, `ghost`, `accent`, `danger`. Default variant is `secondary`. The `loading` prop shows a spinner and disables the button. Has `active:scale-[0.97]` press feedback and `ease-[cubic-bezier(0.23,1,0.32,1)]` transition. Sizes: `sm` (h-8), `md` (h-10, default), `lg` (h-12).
+
+### Theme Toggle (`components/ui/theme-toggle.tsx`)
+
+Light/dark pill toggle. Uses `useState<Theme>("light")` as stable SSR default, syncs to actual stored theme via `useEffect` after mount to prevent hydration mismatch. Writes to `localStorage` key `devflow-theme` and sets/removes `data-theme="dark"` on `document.documentElement`.
 
 ## File Structure Highlights
 
@@ -197,3 +248,7 @@ Client-side (validated in `lib/client-env.ts`):
 3. Provider token is lost on session refresh -- always read from the httpOnly cookie first.
 4. Do not use `middleware.ts` -- use `proxy.ts` with named export.
 5. Accent color is yellow -- never introduce purple or violet into the codebase.
+6. `cn()` is simple string concatenation, not tailwind-merge. Conflicting utilities (e.g., `text-xl` + `text-2xl`) both appear in the output — avoid passing duplicate utility classes.
+7. `card-interactive` hover lift is defined in `globals.css` as a plain CSS class inside `@media (hover: hover) and (pointer: fine)`. It is not a Tailwind utility. Do not try to replicate it with arbitrary Tailwind media variants.
+8. Fraunces is a variable font — do not pass a `weight` array when configuring it in `next/font/google`. Only `axes`, `style`, `subsets`, and `display` are valid.
+9. The no-flash theme script must use `next/script` with `strategy="beforeInteractive"` inside `<body>`. A raw `<script>` tag inside React JSX is never re-executed on the client per React 19 behavior.

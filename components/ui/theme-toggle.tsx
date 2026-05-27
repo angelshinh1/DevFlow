@@ -18,7 +18,7 @@ function readTheme(): Theme {
  */
 export function ThemeToggle({ className }: { className?: string }) {
   // Always start with "light" on the server so SSR matches hydration.
-  // Sync to actual theme after mount — the pre-paint script already applied
+  // Sync to actual theme after mount - the pre-paint script already applied
   // the correct visual state, so the brief mismatch is invisible.
   const [theme, setTheme] = useState<Theme>("light");
   useEffect(() => {

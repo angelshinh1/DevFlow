@@ -21,11 +21,11 @@ export default async function DashboardPage() {
 
       <div className="flex-1 overflow-y-auto">
         <div className="mx-auto max-w-6xl px-6 py-12 sm:px-10 sm:py-16">
-          {/* Editorial section heading — asymmetric, generous whitespace */}
+          {/* Editorial section heading - asymmetric, generous whitespace */}
           <div className="mb-12 grid gap-x-12 gap-y-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>
               <p className="mb-3 text-xs uppercase tracking-[0.18em] text-fg-subtle">
-                Chapter I — Repositories
+                Chapter I - Repositories
               </p>
               <h2 className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium tracking-tight text-fg">
                 Your <span className="editorial-em">working</span> set.

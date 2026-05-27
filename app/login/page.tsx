@@ -18,13 +18,13 @@ const CHAPTERS = [
 export default function LoginPage() {
   return (
     <main className="relative min-h-dvh">
-      {/* Top bar — logotype + theme toggle */}
+      {/* Top bar - logotype + theme toggle */}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 pt-8 sm:px-10 sm:pt-10">
         <Logo className="text-2xl" />
         <ThemeToggle />
       </header>
 
-      {/* Asymmetric editorial split — text on the left, sign-in card on the right. */}
+      {/* Asymmetric editorial split - text on the left, sign-in card on the right. */}
       <section className="mx-auto grid max-w-6xl items-center gap-x-16 gap-y-12 px-6 pb-24 pt-12 sm:px-10 sm:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:gap-x-24 lg:pt-28">
         <div className="max-w-2xl">
           <p className="mb-6 inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-fg-subtle">
@@ -40,7 +40,7 @@ export default function LoginPage() {
           </h1>
 
           <p className="mt-8 max-w-[38rem] text-[1.05rem] leading-relaxed text-fg-muted">
-            DevFlow turns every pull request into a structured, severity-rated review —
+            DevFlow turns every pull request into a structured, severity-rated review -
             so you spend less time hunting through diffs and more time shipping the
             work that matters.
           </p>
@@ -65,7 +65,7 @@ export default function LoginPage() {
           </ol>
         </div>
 
-        {/* Sign-in card — slightly offset, paper-like surface. */}
+        {/* Sign-in card - slightly offset, paper-like surface. */}
         <div className="relative">
           <div
             aria-hidden
@@ -79,7 +79,7 @@ export default function LoginPage() {
               Connect with GitHub
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-fg-muted">
-              We only request read access to your repositories — enough to fetch
+              We only request read access to your repositories - enough to fetch
               pull requests and their diffs.
             </p>
 

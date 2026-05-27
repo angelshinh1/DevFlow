@@ -23,7 +23,7 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: {
-    default: "DevFlow — AI code review for your pull requests",
+    default: "DevFlow - AI code review for your pull requests",
     template: "%s · DevFlow",
   },
   description:
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 /**
  * Applies the saved theme before first paint so dark-mode loads never flash.
- * Placed with strategy="beforeInteractive" — runs before React hydration.
+ * Placed with strategy="beforeInteractive" - runs before React hydration.
  */
 const themeInitScript = `(function(){try{var s=localStorage.getItem('devflow-theme');var t=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(_){}})();`;
 

@@ -4,7 +4,7 @@ import type { Database } from "@/lib/types/database";
 
 /**
  * Supabase client for Client Components. Reads/writes the auth session from
- * browser cookies. Safe to call on every render — the SDK memoizes internally.
+ * browser cookies. Safe to call on every render - the SDK memoizes internally.
  */
 export function createClient() {
   return createBrowserClient<Database>(

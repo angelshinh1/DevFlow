@@ -42,7 +42,7 @@ export function ReviewPanel({
   }
 
   return (
-    // Soft accent wash framing — feels like a featured editorial column.
+    // Soft accent wash framing - feels like a featured editorial column.
     <div className="relative rounded-[var(--radius-card)] bg-gradient-to-br from-accent-soft/80 via-transparent to-transparent p-px card-shadow">
       <div
         className="flex flex-col rounded-[calc(var(--radius-card)-1px)] bg-surface"
@@ -89,7 +89,7 @@ function EmptyReview({ onGenerate, error }: { onGenerate: () => void; error: str
       <div className="space-y-2">
         <p className="font-display text-lg font-medium text-fg">No review yet</p>
         <p className="mx-auto max-w-xs text-sm leading-relaxed text-fg-muted">
-          Generate a structured review of this PR — summary, likely bugs, and
+          Generate a structured review of this PR - summary, likely bugs, and
           suggestions with severity ratings.
         </p>
       </div>
@@ -158,7 +158,7 @@ function ReviewBody({ review, error }: { review: AIReview; error: string | null 
           Suggestions · {review.suggestions.length}
         </h3>
         {review.suggestions.length === 0 ? (
-          <p className="text-sm italic text-fg-muted">No suggestions — nice and clean.</p>
+          <p className="text-sm italic text-fg-muted">No suggestions - nice and clean.</p>
         ) : (
           <ul className="flex flex-col gap-3">
             {review.suggestions.map((s, i) => (

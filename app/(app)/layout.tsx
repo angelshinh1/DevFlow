@@ -21,7 +21,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
     if (err instanceof GitHubAuthError) {
       needsReauth = true;
     } else {
-      // Non-fatal for the shell — pages render their own detailed error states.
+      // Non-fatal for the shell - pages render their own detailed error states.
       log.error({ err }, "failed to load repos for sidebar");
     }
   }

@@ -9,7 +9,7 @@ import type { Database } from "@/lib/types/database";
  *
  * `cookies()` is async in Next.js 16, so this factory is async too. The
  * `setAll` may be called from a Server Component where mutating cookies is
- * disallowed — that's expected and harmless because `proxy.ts` refreshes the
+ * disallowed - that's expected and harmless because `proxy.ts` refreshes the
  * session on every request, so we swallow the resulting error.
  */
 export async function createClient() {
@@ -29,7 +29,7 @@ export async function createClient() {
               cookieStore.set(name, value, options);
             }
           } catch {
-            // Called from a Server Component render — proxy.ts handles refresh.
+            // Called from a Server Component render - proxy.ts handles refresh.
           }
         },
       },

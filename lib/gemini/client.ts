@@ -16,7 +16,7 @@ export const REVIEW_MODEL = "gemini-3.5-flash";
 
 /**
  * Response schema handed to Gemini so it returns strict JSON matching our
- * review shape. `location` is a plain string (empty when unknown) — we normalize
+ * review shape. `location` is a plain string (empty when unknown) - we normalize
  * it to null after parsing, which avoids nullable-schema quirks in the SDK.
  */
 const reviewResponseSchema = {

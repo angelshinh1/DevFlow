@@ -22,7 +22,7 @@ export function AppShell({ user, repos, children }: AppShellProps) {
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
 
-  // Close the drawer on navigation — adjusted during render (no effect needed).
+  // Close the drawer on navigation - adjusted during render (no effect needed).
   if (pathname !== prevPathname) {
     setPrevPathname(pathname);
     if (open) setOpen(false);
@@ -31,7 +31,7 @@ export function AppShell({ user, repos, children }: AppShellProps) {
   return (
     <SidebarContext.Provider value={{ openSidebar: () => setOpen(true) }}>
       <div className="flex h-dvh overflow-hidden">
-        {/* Docked sidebar — desktop only */}
+        {/* Docked sidebar - desktop only */}
         <div className="hidden lg:flex">
           <Sidebar user={user} repos={repos} />
         </div>

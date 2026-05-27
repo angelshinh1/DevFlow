@@ -1,4 +1,4 @@
-/** Shapes we project from the GitHub REST API — only the fields the UI needs. */
+/** Shapes we project from the GitHub REST API - only the fields the UI needs. */
 
 export interface GitHubRepo {
   id: number;

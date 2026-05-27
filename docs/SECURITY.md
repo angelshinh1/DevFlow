@@ -19,7 +19,7 @@ failure raises an exception. The script rolls back, leaving no data behind.
 3. Sign out, sign in with **GitHub account B**.
 4. Confirm account B's **Review history** is empty (does not show A's review).
 5. (Optional) In the Supabase SQL Editor as `postgres`, run
-   `select user_id, repo_full_name from public.reviews;` — you'll see both rows,
+   `select user_id, repo_full_name from public.reviews;` - you'll see both rows,
    because the `postgres` role bypasses RLS. This confirms the data exists and
    that isolation is enforced at the *policy* layer, not by hiding rows.
 
@@ -32,7 +32,7 @@ failure raises an exception. The script rolls back, leaving no data behind.
   Supabase service surface from being bundled into the client.
 - **Environment validation** ([`lib/env.ts`](../lib/env.ts)) fails fast on
   missing/malformed secrets.
-- **Log redaction** — pino redacts `access_token`, `refresh_token`,
+- **Log redaction** - pino redacts `access_token`, `refresh_token`,
   `provider_token`, and auth headers/cookies ([`lib/logger.ts`](../lib/logger.ts)).
-- **Open-redirect protection** — the OAuth callback only honors same-origin
+- **Open-redirect protection** - the OAuth callback only honors same-origin
   relative `next` paths.

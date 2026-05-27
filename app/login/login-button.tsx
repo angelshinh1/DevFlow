@@ -35,7 +35,7 @@ export function LoginButton() {
       setError("Could not start GitHub sign-in. Please try again.");
       setPending(false);
     }
-    // On success the browser is redirected to GitHub — no further UI needed.
+    // On success the browser is redirected to GitHub - no further UI needed.
   }
 
   return (

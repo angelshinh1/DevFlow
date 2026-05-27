@@ -6,7 +6,7 @@
 -- JWT claim simulated), and asserts each sees ONLY their own row.
 --
 -- Run in the Supabase SQL Editor (as the default postgres role). The whole thing
--- runs in a transaction and ROLLS BACK at the end — it leaves no data behind.
+-- runs in a transaction and ROLLS BACK at the end - it leaves no data behind.
 --
 -- A passing run prints two "RLS OK" notices and no exceptions.
 -- Note: auth.users column requirements can vary slightly between Supabase

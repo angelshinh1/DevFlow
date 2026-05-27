@@ -8,7 +8,7 @@ interface LogoProps {
 
 /**
  * Text-based logotype using the Fraunces display serif.
- * "Dev" in italic + "Flow" upright — creates visual tension within a single word.
+ * "Dev" in italic + "Flow" upright - creates visual tension within a single word.
  */
 export function Logo({ className, compact = false }: LogoProps) {
   if (compact) {

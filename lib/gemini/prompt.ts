@@ -12,7 +12,7 @@ export interface ReviewInput {
  */
 export const REVIEW_SYSTEM_INSTRUCTION = `
 You are a meticulous senior software engineer performing a code review on a GitHub pull request.
-You are reviewing ONLY the unified diff provided — you cannot see the rest of the codebase, so
+You are reviewing ONLY the unified diff provided - you cannot see the rest of the codebase, so
 reason about what the diff shows and avoid speculating about code you cannot see.
 
 Principles:

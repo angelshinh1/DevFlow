@@ -55,7 +55,7 @@ export default async function RepoPage({ params }: RepoPageProps) {
               </h2>
             </div>
             <p className="max-w-md text-[1.02rem] leading-relaxed text-fg-muted lg:justify-self-end lg:text-right">
-              {pulls.length} open {pulls.length === 1 ? "PR" : "PRs"} — select one to
+              {pulls.length} open {pulls.length === 1 ? "PR" : "PRs"} - select one to
               generate a structured AI review.
             </p>
           </div>

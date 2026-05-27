@@ -22,7 +22,7 @@ export const githubTokenCookieOptions = {
   maxAge: ONE_WEEK_SECONDS,
 };
 
-/** Raised when no usable GitHub token is available — caller should re-auth. */
+/** Raised when no usable GitHub token is available - caller should re-auth. */
 export class GitHubAuthError extends Error {
   constructor(message = "GitHub authorization is missing or expired. Please sign in again.") {
     super(message);

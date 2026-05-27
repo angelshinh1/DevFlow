@@ -24,7 +24,7 @@ export default async function HistoryPage() {
           <div className="mb-12 grid gap-x-12 gap-y-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>
               <p className="mb-3 text-xs uppercase tracking-[0.18em] text-fg-subtle">
-                Chapter II — History
+                Chapter II - History
               </p>
               <h2 className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium tracking-tight text-fg">
                 Past <span className="editorial-em">reviews</span>.
@@ -33,7 +33,7 @@ export default async function HistoryPage() {
             <p className="max-w-md text-[1.02rem] leading-relaxed text-fg-muted lg:justify-self-end lg:text-right">
               {reviews.length === 0
                 ? "Once you generate a review, it'll live here so you can revisit it anytime."
-                : `${reviews.length} saved ${reviews.length === 1 ? "review" : "reviews"} — each one frozen at the moment it ran.`}
+                : `${reviews.length} saved ${reviews.length === 1 ? "review" : "reviews"} - each one frozen at the moment it ran.`}
             </p>
           </div>
 
@@ -41,7 +41,7 @@ export default async function HistoryPage() {
             <EmptyState
               icon={<HistoryIcon className="size-6" />}
               title="No reviews yet"
-              description="Open a pull request and generate an AI review — it'll show up here so you can revisit it anytime."
+              description="Open a pull request and generate an AI review - it'll show up here so you can revisit it anytime."
             />
           ) : (
             <Stagger className="flex flex-col gap-3">

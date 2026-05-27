@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * DevFlow design system — dual-mode editorial.
+ * DevFlow design system - dual-mode editorial.
  *
  * Default theme is warm cream (editorial light, paper-like). A `[data-theme="dark"]`
  * override flips the underlying vars to the original near-black palette. The yellow
@@ -12,7 +12,7 @@
  */
 
 @theme {
-  /* Surfaces — resolved per-theme via the vars below */
+  /* Surfaces - resolved per-theme via the vars below */
   --color-canvas: var(--canvas);
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
@@ -51,13 +51,13 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
- * Light (default) — warm cream editorial atmosphere.
+ * Light (default) - warm cream editorial atmosphere.
  * Avoids pure white and pure black. Surfaces feel like paper.
  * ──────────────────────────────────────────────────────────────────────── */
 :root {
   color-scheme: light;
 
-  --canvas: #F4F1EB;          /* warm cream — page background */
+  --canvas: #F4F1EB;          /* warm cream - page background */
   --surface: #FBF8F2;         /* slightly lighter, for cards */
   --surface-raised: #FFFFFF;  /* elevated surface */
   --surface-hover: #EFEADF;   /* tonal hover lift */
@@ -69,9 +69,9 @@
   --fg-muted: #5C5749;        /* warm gray */
   --fg-subtle: #8C8676;       /* lighter caption gray */
 
-  --accent: #c9b800;          /* saturated mustard — flips role in light mode */
+  --accent: #c9b800;          /* saturated mustard - flips role in light mode */
   --accent-strong: #a09000;   /* darker mustard for buttons (legible on cream) */
-  --accent-soft: #FFF7C2;     /* pale highlight wash — editorial mark color */
+  --accent-soft: #FFF7C2;     /* pale highlight wash - editorial mark color */
   --accent-ink: #1A1815;      /* text color on top of accent surfaces */
 
   --sev-low: #1F7A4D;
@@ -88,7 +88,7 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
- * Dark — the original near-black + yellow brand.
+ * Dark - the original near-black + yellow brand.
  * ──────────────────────────────────────────────────────────────────────── */
 [data-theme="dark"] {
   color-scheme: dark;
@@ -124,7 +124,7 @@
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
- * Easings — strong custom curves. Avoid the weak built-in CSS easings.
+ * Easings - strong custom curves. Avoid the weak built-in CSS easings.
  * ──────────────────────────────────────────────────────────────────────── */
 :root {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -163,7 +163,7 @@ body {
   line-height: 1.15;
 }
 
-/* Editorial accent highlight — like a soft marker on a key phrase. */
+/* Editorial accent highlight - like a soft marker on a key phrase. */
 .accent-mark {
   background: var(--color-accent-soft);
   color: var(--color-fg);
@@ -173,7 +173,7 @@ body {
   -webkit-box-decoration-break: clone;
 }
 
-/* Drop cap — oversized initial letter on a paragraph. */
+/* Drop cap - oversized initial letter on a paragraph. */
 .drop-cap::first-letter {
   font-family: var(--font-display);
   font-weight: 600;
@@ -252,7 +252,7 @@ body::after {
   background: transparent;
 }
 
-/* Focus ring — keyboard only. */
+/* Focus ring - keyboard only. */
 :focus-visible {
   outline: 2px solid var(--color-accent-strong);
   outline-offset: 2px;
@@ -288,7 +288,7 @@ body::after {
   }
 }
 
-/* Lift on hover — only on real hover-capable pointers (no sticky hover on touch). */
+/* Lift on hover - only on real hover-capable pointers (no sticky hover on touch). */
 @media (hover: hover) and (pointer: fine) {
   .card-interactive:hover {
     transform: translateY(-2px);
@@ -316,7 +316,7 @@ body::after {
     0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* Reduce motion — keep opacity, drop movement. */
+/* Reduce motion - keep opacity, drop movement. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

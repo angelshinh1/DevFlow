@@ -15,7 +15,7 @@ function isPublicPath(pathname: string): boolean {
  * `proxy.ts` (Next.js 16's renamed middleware) on matched requests.
  *
  * IMPORTANT: the returned response object carries the refreshed auth cookies.
- * It must be returned as-is — do not construct a new response and drop it.
+ * It must be returned as-is - do not construct a new response and drop it.
  */
 export async function updateSession(request: NextRequest): Promise<NextResponse> {
   let response = NextResponse.next({ request });
@@ -42,7 +42,7 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   );
 
   // Touch the user to trigger a token refresh when needed. Do not run code
-  // between createServerClient and getUser — it can desync the session.
+  // between createServerClient and getUser - it can desync the session.
   const {
     data: { user },
   } = await supabase.auth.getUser();

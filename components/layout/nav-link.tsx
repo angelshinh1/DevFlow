@@ -11,9 +11,11 @@ interface NavLinkProps {
   /** When true, only an exact path match is considered active. */
   exact?: boolean;
   icon?: ReactNode;
+  /** Optional editorial chapter marker (Roman numeral or similar). */
+  marker?: string;
 }
 
-export function NavLink({ href, children, exact = false, icon }: NavLinkProps) {
+export function NavLink({ href, children, exact = false, icon, marker }: NavLinkProps) {
   const pathname = usePathname();
   const active = exact ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 
@@ -22,18 +24,29 @@ export function NavLink({ href, children, exact = false, icon }: NavLinkProps) {
       href={href}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "group flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors",
+        "group relative flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm",
+        "transition-[background,color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]",
         active
-          ? "bg-surface-raised text-fg"
+          ? "bg-accent-soft text-fg"
           : "text-fg-muted hover:bg-surface-hover hover:text-fg",
       )}
     >
       {icon && (
-        <span className={cn("shrink-0", active ? "text-accent" : "text-fg-subtle group-hover:text-fg-muted")}>
+        <span
+          className={cn(
+            "shrink-0 transition-colors",
+            active ? "text-fg" : "text-fg-subtle group-hover:text-fg-muted",
+          )}
+        >
           {icon}
         </span>
       )}
       <span className="truncate">{children}</span>
+      {marker && (
+        <span className="ml-auto font-display text-[0.65rem] uppercase tracking-[0.2em] text-fg-subtle">
+          {marker}
+        </span>
+      )}
     </Link>
   );
 }

@@ -40,7 +40,7 @@ export function LoginButton() {
 
   return (
     <div className="flex flex-col gap-3">
-      <Button variant="primary" size="md" loading={pending} onClick={signIn} className="w-full">
+      <Button variant="primary" size="lg" loading={pending} onClick={signIn} className="w-full">
         {!pending && <GitHubIcon className="size-4" />}
         Continue with GitHub
       </Button>

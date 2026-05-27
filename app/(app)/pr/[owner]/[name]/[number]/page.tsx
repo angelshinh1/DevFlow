@@ -55,12 +55,12 @@ export default async function PRPage({ params }: PRPageProps) {
       </Header>
 
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-6 p-4 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(360px,400px)]">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-x-10 gap-y-8 px-6 py-10 sm:px-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(380px,420px)]">
           {/* Left: PR metadata + diff */}
-          <div className="flex min-w-0 flex-col gap-5">
+          <div className="flex min-w-0 flex-col gap-8">
             <FadeIn>
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   {pr.draft ? (
                     <Badge variant="draft">Draft</Badge>
                   ) : (
@@ -68,19 +68,25 @@ export default async function PRPage({ params }: PRPageProps) {
                       Open
                     </Badge>
                   )}
-                  <span className="text-xs text-fg-subtle">#{pr.number}</span>
+                  <span className="font-mono text-xs text-fg-subtle">#{pr.number}</span>
                 </div>
-                <h1 className="mt-2 text-xl font-semibold tracking-tight text-fg">{pr.title}</h1>
-                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-fg-subtle">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Avatar src={pr.authorAvatarUrl} alt={pr.authorLogin} size={18} />
-                    {pr.authorLogin}
+
+                <h1 className="mt-4 font-display text-[clamp(1.875rem,3.6vw,2.75rem)] font-medium leading-[1.1] tracking-tight text-fg">
+                  {pr.title}
+                </h1>
+
+                <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-fg-subtle">
+                  <span className="inline-flex items-center gap-2">
+                    <Avatar src={pr.authorAvatarUrl} alt={pr.authorLogin} size={20} />
+                    <span className="text-fg-muted">{pr.authorLogin}</span>
                   </span>
                   <span className="font-mono">
                     {pr.baseRef} ← {pr.headRef}
                   </span>
-                  <span className="text-[var(--color-diff-add-fg)]">+{pr.additions}</span>
-                  <span className="text-[var(--color-diff-del-fg)]">−{pr.deletions}</span>
+                  <span>
+                    <span className="text-[var(--color-diff-add-fg)]">+{pr.additions}</span>{" "}
+                    <span className="text-[var(--color-diff-del-fg)]">−{pr.deletions}</span>
+                  </span>
                   <span>
                     {pr.changedFiles} {pr.changedFiles === 1 ? "file" : "files"} changed
                   </span>
@@ -90,8 +96,11 @@ export default async function PRPage({ params }: PRPageProps) {
 
             {pr.body?.trim() && (
               <FadeIn delay={0.05}>
-                <div className="rounded-[var(--radius-card)] border border-line bg-surface p-4">
-                  <p className="whitespace-pre-wrap text-sm leading-relaxed text-fg-muted">
+                <div className="rounded-[var(--radius-card)] border border-line bg-surface p-6 card-shadow">
+                  <p className="font-display text-xs uppercase tracking-[0.18em] text-fg-subtle">
+                    Description
+                  </p>
+                  <p className="mt-3 whitespace-pre-wrap text-[0.95rem] leading-relaxed text-fg-muted">
                     {pr.body.trim()}
                   </p>
                 </div>
@@ -99,7 +108,12 @@ export default async function PRPage({ params }: PRPageProps) {
             )}
 
             <FadeIn delay={0.1}>
-              <DiffViewer diff={pr.diff} />
+              <div>
+                <p className="mb-3 font-display text-xs uppercase tracking-[0.18em] text-fg-subtle">
+                  Changes
+                </p>
+                <DiffViewer diff={pr.diff} />
+              </div>
             </FadeIn>
           </div>
 

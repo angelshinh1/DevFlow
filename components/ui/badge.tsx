@@ -6,11 +6,11 @@ type BadgeVariant = "neutral" | "accent" | "low" | "medium" | "high" | "open" | 
 
 const variants: Record<BadgeVariant, string> = {
   neutral: "bg-surface-raised text-fg-muted border-line",
-  accent: "bg-accent-soft text-accent border-accent/30",
-  low: "bg-[var(--color-sev-low-soft)] text-[var(--color-sev-low)] border-[var(--color-sev-low)]/25",
-  medium: "bg-[var(--color-sev-med-soft)] text-[var(--color-sev-med)] border-[var(--color-sev-med)]/25",
-  high: "bg-[var(--color-sev-high-soft)] text-[var(--color-sev-high)] border-[var(--color-sev-high)]/25",
-  open: "bg-[var(--color-sev-low-soft)] text-[var(--color-sev-low)] border-[var(--color-sev-low)]/25",
+  accent: "bg-accent-soft text-fg border-[color-mix(in_oklch,var(--color-accent-strong)_30%,transparent)]",
+  low: "bg-[var(--color-sev-low-soft)] text-[var(--color-sev-low)] border-[color-mix(in_oklch,var(--color-sev-low)_25%,transparent)]",
+  medium: "bg-[var(--color-sev-med-soft)] text-[var(--color-sev-med)] border-[color-mix(in_oklch,var(--color-sev-med)_25%,transparent)]",
+  high: "bg-[var(--color-sev-high-soft)] text-[var(--color-sev-high)] border-[color-mix(in_oklch,var(--color-sev-high)_25%,transparent)]",
+  open: "bg-[var(--color-sev-low-soft)] text-[var(--color-sev-low)] border-[color-mix(in_oklch,var(--color-sev-low)_25%,transparent)]",
   draft: "bg-surface-raised text-fg-subtle border-line",
 };
 
@@ -24,7 +24,7 @@ export function Badge({ variant = "neutral", dot = false, className, children, .
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-medium",
+        "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[0.7rem] font-medium uppercase tracking-[0.06em]",
         variants[variant],
         className,
       )}
@@ -36,7 +36,6 @@ export function Badge({ variant = "neutral", dot = false, className, children, .
   );
 }
 
-/** Convenience: a severity badge with a sensible default label. */
 export function SeverityBadge({ severity, className }: { severity: Severity; className?: string }) {
   const label = severity.charAt(0).toUpperCase() + severity.slice(1);
   return (

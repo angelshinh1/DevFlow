@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { timeAgo } from "@/lib/utils";
 import type { GitHubRepo } from "@/lib/types/github";
 
-/** A few well-known language accent colors; everything else falls back to gray. */
 const LANGUAGE_COLORS: Record<string, string> = {
   TypeScript: "#3178c6",
   JavaScript: "#f1e05a",
@@ -27,9 +26,11 @@ const LANGUAGE_COLORS: Record<string, string> = {
 export function RepoCard({ repo }: { repo: GitHubRepo }) {
   return (
     <Link href={`/repo/${repo.owner}/${repo.name}`} className="block rounded-[var(--radius-card)]">
-      <Card interactive className="h-full p-5">
+      <Card interactive className="flex h-full flex-col p-6">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="truncate text-sm font-semibold text-fg">{repo.name}</h3>
+          <h3 className="font-display truncate text-xl font-medium tracking-tight text-fg">
+            {repo.name}
+          </h3>
           {repo.private && (
             <Badge variant="neutral" className="shrink-0">
               Private
@@ -37,24 +38,26 @@ export function RepoCard({ repo }: { repo: GitHubRepo }) {
           )}
         </div>
 
-        <p className="mt-1 line-clamp-2 min-h-[2.5rem] text-sm text-fg-muted">
-          {repo.description ?? "No description provided."}
+        <p className="mt-2 line-clamp-2 min-h-[2.75rem] text-sm leading-relaxed text-fg-muted">
+          {repo.description ?? <span className="italic text-fg-subtle">No description provided.</span>}
         </p>
 
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-fg-subtle">
-          {repo.language && (
-            <span className="inline-flex items-center gap-1.5">
-              <span
-                className="size-2.5 rounded-full"
-                style={{ background: LANGUAGE_COLORS[repo.language] ?? "#6b6b75" }}
-                aria-hidden
-              />
-              {repo.language}
-            </span>
-          )}
-          <span>★ {repo.stars}</span>
-          <span>{repo.openIssues} issues</span>
-          {repo.pushedAt && <span className="ml-auto">Updated {timeAgo(repo.pushedAt)}</span>}
+        <div className="mt-auto pt-5">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-line pt-4 text-xs text-fg-subtle">
+            {repo.language && (
+              <span className="inline-flex items-center gap-1.5">
+                <span
+                  className="size-2.5 rounded-full"
+                  style={{ background: LANGUAGE_COLORS[repo.language] ?? "#8C8676" }}
+                  aria-hidden
+                />
+                {repo.language}
+              </span>
+            )}
+            <span>★ {repo.stars}</span>
+            <span>{repo.openIssues} issues</span>
+            {repo.pushedAt && <span className="ml-auto font-display italic">{timeAgo(repo.pushedAt)}</span>}
+          </div>
         </div>
       </Card>
     </Link>

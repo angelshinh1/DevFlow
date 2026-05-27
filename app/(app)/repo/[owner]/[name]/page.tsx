@@ -43,30 +43,39 @@ export default async function RepoPage({ params }: RepoPageProps) {
         />
       </Header>
 
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
-        <div className="mb-5">
-          <h2 className="text-lg font-semibold tracking-tight text-fg">Open pull requests</h2>
-          <p className="text-sm text-fg-muted">
-            {pulls.length} open {pulls.length === 1 ? "PR" : "PRs"} · select one to generate an AI
-            review.
-          </p>
-        </div>
+      <div className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-5xl px-6 py-12 sm:px-10 sm:py-16">
+          <div className="mb-12 grid gap-x-12 gap-y-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="mb-3 inline-flex items-baseline gap-2 text-xs uppercase tracking-[0.18em] text-fg-subtle">
+                <span className="font-mono normal-case tracking-normal text-fg-muted">{owner}/{name}</span>
+              </p>
+              <h2 className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium tracking-tight text-fg">
+                Open <span className="editorial-em">pull requests</span>.
+              </h2>
+            </div>
+            <p className="max-w-md text-[1.02rem] leading-relaxed text-fg-muted lg:justify-self-end lg:text-right">
+              {pulls.length} open {pulls.length === 1 ? "PR" : "PRs"} — select one to
+              generate a structured AI review.
+            </p>
+          </div>
 
-        {pulls.length === 0 ? (
-          <EmptyState
-            icon={<PullRequestIcon className="size-6" />}
-            title="No open pull requests"
-            description="This repository has no open PRs right now. Reviews can only be generated for open pull requests."
-          />
-        ) : (
-          <Stagger className="flex flex-col gap-3">
-            {pulls.map((pr) => (
-              <FadeInItem key={pr.id}>
-                <PRCard pr={pr} owner={owner} name={name} />
-              </FadeInItem>
-            ))}
-          </Stagger>
-        )}
+          {pulls.length === 0 ? (
+            <EmptyState
+              icon={<PullRequestIcon className="size-6" />}
+              title="No open pull requests"
+              description="This repository has no open PRs right now. Reviews can only be generated for open pull requests."
+            />
+          ) : (
+            <Stagger className="flex flex-col gap-3">
+              {pulls.map((pr) => (
+                <FadeInItem key={pr.id}>
+                  <PRCard pr={pr} owner={owner} name={name} />
+                </FadeInItem>
+              ))}
+            </Stagger>
+          )}
+        </div>
       </div>
     </>
   );

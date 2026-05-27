@@ -19,29 +19,40 @@ export default async function DashboardPage() {
         <h1 className="text-sm font-semibold text-fg">Dashboard</h1>
       </Header>
 
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
-        <div className="mb-5">
-          <h2 className="text-lg font-semibold tracking-tight text-fg">Your repositories</h2>
-          <p className="text-sm text-fg-muted">
-            Pick a repository to review its open pull requests.
-          </p>
-        </div>
+      <div className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-6xl px-6 py-12 sm:px-10 sm:py-16">
+          {/* Editorial section heading — asymmetric, generous whitespace */}
+          <div className="mb-12 grid gap-x-12 gap-y-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="mb-3 text-xs uppercase tracking-[0.18em] text-fg-subtle">
+                Chapter I — Repositories
+              </p>
+              <h2 className="font-display text-[clamp(2.25rem,4.5vw,3.5rem)] font-medium tracking-tight text-fg">
+                Your <span className="editorial-em">working</span> set.
+              </h2>
+            </div>
+            <p className="max-w-md text-[1.02rem] leading-relaxed text-fg-muted lg:justify-self-end lg:text-right">
+              Pick a repository to browse its open pull requests and generate a
+              structured AI review.
+            </p>
+          </div>
 
-        {repos.length === 0 ? (
-          <EmptyState
-            icon={<RepoIcon className="size-6" />}
-            title="No repositories found"
-            description="We couldn't find any repositories on your GitHub account. Create one or check your access scopes."
-          />
-        ) : (
-          <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {repos.map((repo) => (
-              <FadeInItem key={repo.id}>
-                <RepoCard repo={repo} />
-              </FadeInItem>
-            ))}
-          </Stagger>
-        )}
+          {repos.length === 0 ? (
+            <EmptyState
+              icon={<RepoIcon className="size-6" />}
+              title="No repositories found"
+              description="We couldn't find any repositories on your GitHub account. Create one or check your access scopes."
+            />
+          ) : (
+            <Stagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {repos.map((repo) => (
+                <FadeInItem key={repo.id}>
+                  <RepoCard repo={repo} />
+                </FadeInItem>
+              ))}
+            </Stagger>
+          )}
+        </div>
       </div>
     </>
   );

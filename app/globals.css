@@ -1,54 +1,135 @@
 @import "tailwindcss";
 
 /*
- * DevFlow design system — dark only.
- * Linear/Vercel-leaning: near-black canvas, low-chroma surfaces, a single
- * violet accent reserved for the "AI" surface, and semantic severity hues.
+ * DevFlow design system — dual-mode editorial.
+ *
+ * Default theme is warm cream (editorial light, paper-like). A `[data-theme="dark"]`
+ * override flips the underlying vars to the original near-black palette. The yellow
+ * accent is the unifying brand thread across both modes.
+ *
+ * Tokens follow editorial typography principles: serif display, sans body, modular
+ * scale, generous line-height for body text, tight for display.
  */
 
 @theme {
-  /* Canvas + surfaces (never pure black) */
-  --color-canvas: #0a0a0a;
-  --color-surface: #101012;
-  --color-surface-raised: #16161a;
-  --color-surface-hover: #1b1b20;
+  /* Surfaces — resolved per-theme via the vars below */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-hover: var(--surface-hover);
 
-  /* Hairline borders */
-  --color-line: #232328;
-  --color-line-strong: #2e2e35;
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
 
-  /* Text */
-  --color-fg: #ededed;
-  --color-fg-muted: #a1a1aa;
-  --color-fg-subtle: #6b6b75;
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
 
-  /* Yellow accent — the product's personality, used sparingly */
-  --color-accent: #fffabc;
-  --color-accent-strong: #c9b800;
-  --color-accent-soft: #1e1c04;
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
 
-  /* Severity scale for AI findings */
-  --color-sev-low: #34d399;
-  --color-sev-low-soft: #0e2a22;
-  --color-sev-med: #fbbf24;
-  --color-sev-med-soft: #2a230d;
-  --color-sev-high: #f87171;
-  --color-sev-high-soft: #2c1416;
+  --color-sev-low: var(--sev-low);
+  --color-sev-low-soft: var(--sev-low-soft);
+  --color-sev-med: var(--sev-med);
+  --color-sev-med-soft: var(--sev-med-soft);
+  --color-sev-high: var(--sev-high);
+  --color-sev-high-soft: var(--sev-high-soft);
 
-  /* Diff colors */
-  --color-diff-add: #1c3023;
-  --color-diff-add-fg: #7ee2a8;
-  --color-diff-del: #36181b;
-  --color-diff-del-fg: #f4a6a6;
+  --color-diff-add: var(--diff-add);
+  --color-diff-add-fg: var(--diff-add-fg);
+  --color-diff-del: var(--diff-del);
+  --color-diff-del-fg: var(--diff-del-fg);
 
+  /* Fonts: serif for display, sans for UI/body, mono for code. */
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, "Times New Roman", serif;
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
 
   --radius-card: 0.75rem;
 }
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * Light (default) — warm cream editorial atmosphere.
+ * Avoids pure white and pure black. Surfaces feel like paper.
+ * ──────────────────────────────────────────────────────────────────────── */
 :root {
+  color-scheme: light;
+
+  --canvas: #F4F1EB;          /* warm cream — page background */
+  --surface: #FBF8F2;         /* slightly lighter, for cards */
+  --surface-raised: #FFFFFF;  /* elevated surface */
+  --surface-hover: #EFEADF;   /* tonal hover lift */
+
+  --line: #E2DBCB;            /* warm hairline */
+  --line-strong: #CFC6B2;     /* stronger hairline */
+
+  --fg: #1A1815;              /* near-black with warm undertone */
+  --fg-muted: #5C5749;        /* warm gray */
+  --fg-subtle: #8C8676;       /* lighter caption gray */
+
+  --accent: #c9b800;          /* saturated mustard — flips role in light mode */
+  --accent-strong: #a09000;   /* darker mustard for buttons (legible on cream) */
+  --accent-soft: #FFF7C2;     /* pale highlight wash — editorial mark color */
+  --accent-ink: #1A1815;      /* text color on top of accent surfaces */
+
+  --sev-low: #1F7A4D;
+  --sev-low-soft: #DDEFDF;
+  --sev-med: #9A6B00;
+  --sev-med-soft: #FBEEC9;
+  --sev-high: #B0301F;
+  --sev-high-soft: #F5DAD3;
+
+  --diff-add: #DDF1E1;
+  --diff-add-fg: #1F7A4D;
+  --diff-del: #F6DCDB;
+  --diff-del-fg: #B0301F;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Dark — the original near-black + yellow brand.
+ * ──────────────────────────────────────────────────────────────────────── */
+[data-theme="dark"] {
   color-scheme: dark;
+
+  --canvas: #0a0a0a;
+  --surface: #101012;
+  --surface-raised: #16161a;
+  --surface-hover: #1b1b20;
+
+  --line: #232328;
+  --line-strong: #2e2e35;
+
+  --fg: #ededed;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #6b6b75;
+
+  --accent: #fffabc;
+  --accent-strong: #c9b800;
+  --accent-soft: #1e1c04;
+  --accent-ink: #0a0a0a;
+
+  --sev-low: #34d399;
+  --sev-low-soft: #0e2a22;
+  --sev-med: #fbbf24;
+  --sev-med-soft: #2a230d;
+  --sev-high: #f87171;
+  --sev-high-soft: #2c1416;
+
+  --diff-add: #1c3023;
+  --diff-add-fg: #7ee2a8;
+  --diff-del: #36181b;
+  --diff-del-fg: #f4a6a6;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Easings — strong custom curves. Avoid the weak built-in CSS easings.
+ * ──────────────────────────────────────────────────────────────────────── */
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 * {
@@ -64,25 +145,89 @@ body {
   background: var(--color-canvas);
   color: var(--color-fg);
   font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* Subtle ambient glow behind the app — barely there, adds depth */
+/* Display headings get the serif. Tight leading. Slightly tracked-in. */
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01", "lnum";
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+
+/* Editorial accent highlight — like a soft marker on a key phrase. */
+.accent-mark {
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
+  padding: 0.02em 0.28em;
+  border-radius: 0.18em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Drop cap — oversized initial letter on a paragraph. */
+.drop-cap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 600;
+  float: left;
+  font-size: 4.6em;
+  line-height: 0.85;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--color-fg);
+}
+
+/* Italic serif emphasis (use instead of bold for editorial text). */
+.editorial-em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Ambient atmosphere
+ *
+ * - body::before: soft radial accent glow.
+ * - body::after: subtle film-grain noise overlay, anchored to the viewport.
+ * ──────────────────────────────────────────────────────────────────────── */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
-  background:
-    radial-gradient(60rem 40rem at 80% -10%, rgba(255, 250, 188, 0.06), transparent 60%),
-    radial-gradient(50rem 30rem at 0% 0%, rgba(255, 250, 188, 0.03), transparent 55%);
   pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 85% -10%, color-mix(in oklch, var(--color-accent) 22%, transparent), transparent 60%),
+    radial-gradient(50rem 30rem at -5% 5%, color-mix(in oklch, var(--color-accent) 12%, transparent), transparent 55%);
+  opacity: 0.55;
 }
 
+[data-theme="dark"] body::before {
+  opacity: 0.35;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] body::after {
+  opacity: 0.06;
+  mix-blend-mode: screen;
+}
+
+/* Selection: warm yellow wash, dark text. */
 ::selection {
-  background: #F8EDC0;
-  color: #0a0a0a;
+  background: var(--color-accent-soft);
+  color: var(--color-fg);
 }
 
 /* Quiet, thin scrollbars */
@@ -102,13 +247,16 @@ body::before {
   background: transparent;
 }
 
-/* Focus ring — keyboard only, accent colored */
+/* Focus ring — keyboard only. */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-accent-strong);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * Utilities
+ * ──────────────────────────────────────────────────────────────────────── */
 @keyframes devflow-shimmer {
   100% {
     transform: translateX(100%);
@@ -128,9 +276,49 @@ body::before {
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.04),
+      color-mix(in oklch, var(--color-fg) 5%, transparent),
       transparent
     );
     animation: devflow-shimmer 1.5s infinite;
+  }
+}
+
+/* Lift on hover — only on real hover-capable pointers (no sticky hover on touch). */
+@media (hover: hover) and (pointer: fine) {
+  .card-interactive:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 6px rgba(20, 18, 12, 0.06),
+      0 16px 36px rgba(20, 18, 12, 0.09);
+  }
+  [data-theme="dark"] .card-interactive:hover {
+    box-shadow:
+      0 2px 6px rgba(0, 0, 0, 0.5),
+      0 18px 40px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Editorial card shadow that adapts per theme. */
+@utility card-shadow {
+  box-shadow:
+    0 1px 2px rgba(20, 18, 12, 0.04),
+    0 6px 18px rgba(20, 18, 12, 0.06);
+}
+
+[data-theme="dark"] .card-shadow {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Reduce motion — keep opacity, drop movement. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.15s !important;
+    scroll-behavior: auto !important;
   }
 }

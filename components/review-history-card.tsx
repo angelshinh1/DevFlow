@@ -14,19 +14,23 @@ export function ReviewHistoryCard({ review }: { review: SavedReview }) {
       href={`/pr/${owner}/${name}/${review.prNumber}`}
       className="block rounded-[var(--radius-card)]"
     >
-      <Card interactive className="flex items-center gap-4 p-4">
+      <Card interactive className="flex items-center gap-5 p-5">
         <SeverityBadge severity={review.review.severity} className="shrink-0" />
 
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-fg">{review.prTitle}</p>
-          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-fg-subtle">
+          <p className="font-display truncate text-base font-medium leading-snug text-fg">
+            {review.prTitle}
+          </p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-fg-subtle">
             <span className="font-mono">
               {review.repoFullName} #{review.prNumber}
             </span>
+            <span>·</span>
             <span>
-              {bugCount} {bugCount === 1 ? "issue" : "issues"} found
+              {bugCount} {bugCount === 1 ? "issue" : "issues"}
             </span>
-            <span>reviewed {timeAgo(review.createdAt)}</span>
+            <span>·</span>
+            <span className="font-display italic">{timeAgo(review.createdAt)}</span>
           </div>
         </div>
 

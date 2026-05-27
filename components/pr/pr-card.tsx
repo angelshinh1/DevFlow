@@ -18,14 +18,16 @@ export function PRCard({ pr, owner, name }: PRCardProps) {
       href={`/pr/${owner}/${name}/${pr.number}`}
       className="block rounded-[var(--radius-card)]"
     >
-      <Card interactive className="flex items-center gap-4 p-4">
-        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-surface-raised text-[var(--color-sev-low)]">
+      <Card interactive className="flex items-center gap-5 p-5">
+        <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-surface-raised text-[var(--color-sev-low)]">
           <PullRequestIcon className="size-4" />
         </span>
 
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <span className="truncate text-sm font-medium text-fg">{pr.title}</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="font-display truncate text-base font-medium leading-snug text-fg">
+              {pr.title}
+            </span>
             {pr.draft ? (
               <Badge variant="draft" className="shrink-0">
                 Draft
@@ -36,16 +38,19 @@ export function PRCard({ pr, owner, name }: PRCardProps) {
               </Badge>
             )}
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-fg-subtle">
-            <span>#{pr.number}</span>
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-fg-subtle">
+            <span className="font-mono">#{pr.number}</span>
+            <span>·</span>
             <span className="inline-flex items-center gap-1.5">
               <Avatar src={pr.authorAvatarUrl} alt={pr.authorLogin} size={16} />
               {pr.authorLogin}
             </span>
+            <span>·</span>
             <span className="font-mono text-[0.7rem]">
               {pr.baseRef} ← {pr.headRef}
             </span>
-            <span>updated {timeAgo(pr.updatedAt)}</span>
+            <span>·</span>
+            <span className="font-display italic">{timeAgo(pr.updatedAt)}</span>
           </div>
         </div>
 

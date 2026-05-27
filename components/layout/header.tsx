@@ -10,7 +10,7 @@ export function Header({ children, actions }: { children: ReactNode; actions?: R
   const { openSidebar } = useSidebar();
 
   return (
-    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-canvas/80 px-4 backdrop-blur sm:px-6">
+    <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-canvas/75 px-4 backdrop-blur-md sm:px-6">
       <div className="flex min-w-0 items-center gap-2">
         <button
           type="button"

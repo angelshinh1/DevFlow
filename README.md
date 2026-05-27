@@ -5,7 +5,6 @@
 
 *Read the diff, surface the bugs, ship with confidence.*
 
-<br />
 
 </div>
 
@@ -23,7 +22,6 @@ Reviews are stored per-user. Come back to them later. Regenerate when the code c
 
 ## The app
 
-<br />
 
 <table>
 <tr>
@@ -38,8 +36,6 @@ Reviews are stored per-user. Come back to them later. Regenerate when the code c
 
 <div align="center"><sub>Dashboard &nbsp;·&nbsp; light &amp; dark</sub></div>
 
-<br />
-
 <table>
 <tr>
 <td width="50%">
@@ -52,8 +48,6 @@ Reviews are stored per-user. Come back to them later. Regenerate when the code c
 </table>
 
 <div align="center"><sub>PR detail + AI review panel &nbsp;·&nbsp; light &amp; dark</sub></div>
-
-<br />
 
 <table>
 <tr>

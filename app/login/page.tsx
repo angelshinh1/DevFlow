@@ -32,7 +32,7 @@ export default function LoginPage() {
             An AI reviewer for your pull requests
           </p>
 
-          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.25rem)] font-medium text-fg">
+          <h1 className="font-display text-[clamp(2.75rem,6.5vw,5.25rem)] font-medium text-fg leading-[1.15]">
             <span className="drop-cap">Read</span> the diff,{" "}
             <span className="editorial-em">surface the bugs</span>,
             <br className="hidden sm:block" />
